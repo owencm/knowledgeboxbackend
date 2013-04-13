@@ -73,7 +73,7 @@ def qaitem_learn(request, qaitem_id):
 	data = request.POST
 	user = User.objects.get(id=data.get("user_id"))
 	qaitem.learners.add(user)
-	return HttpResponse("{success: true}") 
+	return HttpResponse(simplejson.dumps({"success": True})) 
 
 @csrf_exempt
 def qaitem_forget(request, qaitem_id):
@@ -81,7 +81,7 @@ def qaitem_forget(request, qaitem_id):
 	data = request.POST
 	user = User.objects.get(id=data.get("user_id"))
 	qaitem.learners.remove(user)
-	return HttpResponse("{success: true}") 
+	return HttpResponse(simplejson.dumps({"success": True})) 
 
 @csrf_exempt
 def login(request):
