@@ -88,9 +88,11 @@ def login(request):
 	data = request.POST
 	user = User.objects.get(username=data.get("username"))
 	if data.get("password") == user.password:
-		return HttpResponse("{success: true, id: " + str(user.id) + " }")
+		response = {"success": true, "id": str(user.id)}
+		return HttpResponse(simplejson.dumps(response))
 	else:
-		return HttpResponse("{success: false}")
+		response = {"success": false}
+		return HttpResponse(simplejson.dumps(response))
 	
 @csrf_exempt
 def register(request):
