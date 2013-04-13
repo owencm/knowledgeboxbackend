@@ -7,6 +7,27 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from backend.models import QaItem, User
 
+def json_response(func):
+    """
+    A decorator thats takes a view response and turns it
+    into json. If a callback is added through GET or POST
+    the response is JSONP.
+    """
+    def decorator(request, *args, **kwargs):
+        objects = func(request, *args, **kwargs)
+        if isinstance(objects, HttpResponse):
+            return objects
+        try:
+            data = simplejson.dumps(objects)
+            if 'callback' in request.REQUEST:
+                # a jsonp response!
+                data = '%s(%s);' % (request.REQUEST['callback'], data)
+                return HttpResponse(data, "text/javascript")
+        except:
+            data = simplejson.dumps(str(objects))
+        return HttpResponse(data, "application/json")
+    return decorator
+
 def serialiseItem(qaitem):
 	return {"question": qaitem.question, "answer": qaitem.answer, "id": qaitem.id, "url": qaitem.url}
 
@@ -39,12 +60,12 @@ def qaitem_index_filter_by_url(request, url):
 	output_json = simplejson.dumps(qaitems_serialised)
 	return HttpResponse(output_json, mimetype='application/json')
 
+@json_response
 def qaitem_index_filter_by_learning(request, user_id):
 	user = User.objects.get(id=user_id)
 	qaitems = user.qaitem_set.all()
 	qaitems_serialised = map(serialiseItem, qaitems)
-	output_json = simplejson.dumps(qaitems_serialised)
-	return HttpResponse(output_json, mimetype='application/json')
+	return qaitems_serialised
 
 @csrf_exempt
 def qaitem_learn(request, qaitem_id):
