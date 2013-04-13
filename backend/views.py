@@ -108,7 +108,7 @@ def register(request):
 	user.save()
 	user_serialised = {"username": user.username, "password": user.password, "id": user.id}
 	output_json = simplejson.dumps(user_serialised)
-	return HttpResponse(output_json, mimetype='application/json') 
+	return HttpResponse(output_json, mimetype='application/json')
 
 # # Create your views here.
 
