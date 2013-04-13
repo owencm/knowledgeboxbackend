@@ -1,16 +1,31 @@
 from django.http import HttpResponse
 from django.utils import simplejson
+import datetime
+from django.utils.timezone import utc
+from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from backend.models import QaItem
 
 def serialiseItem(qaitem):
 	return {"question": qaitem.question, "answer": qaitem.answer, "id": qaitem.id}
 
+@csrf_exempt
 def qaitem_index(request):
-	qaitems = QaItem.objects.all()
-	qaitems_serialised = map(serialiseItem, qaitems)
-	output_json = simplejson.dumps(qaitems_serialised)
-	return HttpResponse(output_json, mimetype='application/json')
+
+	if request.method == 'GET':
+
+		qaitems = QaItem.objects.all()
+		qaitems_serialised = map(serialiseItem, qaitems)
+		output_json = simplejson.dumps(qaitems_serialised)
+		return HttpResponse(output_json, mimetype='application/json')
+
+	elif request.method == 'POST':
+		data = request.POST
+		now = datetime.datetime.utcnow().replace(tzinfo=utc)
+		qaitem = QaItem(question=data.get("question"), answer=data.get("answer"), creator_id=1, created_at=now)
+		qaitem.save()
+		return HttpResponse("")
 
 def qaitem(request, qaitem_id):
 	qaitem = serialiseItem(QaItem.objects.filter(id=qaitem_id)[0])
