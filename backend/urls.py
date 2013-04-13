@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from rest_framework.urlpatterns import format_suffix_patterns
+# from rest_framework.urlpatterns import format_suffix_patterns
 # from backend.views import QaItemList, QaItemDetail
 
 from backend import views
