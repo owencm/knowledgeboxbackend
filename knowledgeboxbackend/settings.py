@@ -199,15 +199,10 @@ INSTALLED_APPS = (
     'backend',
     # external
     'social_auth',
+    'rest_framework',
     # admin
     'django.contrib.admin',
-<<<<<<< HEAD
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-    'rest_framework',
-=======
     'django.contrib.admindocs',
->>>>>>> social-auth
 )
 
 REST_FRAMEWORK = {
