@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from backend.models import QaItem
 
 def serialiseItem(qaitem):
-	return {"question": qaitem.question, "answer": qaitem.answer, "id": qaitem.id}
+	return {"question": qaitem.question, "answer": qaitem.answer, "id": qaitem.id, "url": qaitem.url}
 
 @csrf_exempt
 def qaitem_index(request):
@@ -32,6 +32,11 @@ def qaitem(request, qaitem_id):
 	output_json = simplejson.dumps(qaitem)
 	return HttpResponse(output_json, mimetype='application/json') 
 
+def qaitem_index_filter_by_url(request, url):
+	qaitems = QaItem.objects.filter(url=url)
+	qaitems_serialised = map(serialiseItem, qaitems)
+	output_json = simplejson.dumps(qaitems_serialised)
+	return HttpResponse(output_json, mimetype='application/json')
 
 # # Create your views here.
 

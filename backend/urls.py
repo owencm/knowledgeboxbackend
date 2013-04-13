@@ -5,8 +5,9 @@ from django.conf.urls import patterns, url
 from backend import views
 
 urlpatterns = patterns('',
-	url(r'^qaitems/$', views.qaitem_index, name='qaitem_index'),
-	url(r'^qaitems/(?P<qaitem_id>\d+)$', views.qaitem, name='qaitem')
+	url(r'^qaitems/$', views.qaitem_index, name='qaitem-index'),
+	url(r'^qaitems/id/(?P<qaitem_id>\d+)$', views.qaitem, name='qaitem-detail'),
+	url(r'^qaitems/url/(?P<url>.+)$', views.qaitem_index_filter_by_url, name='qaitem-filter-by-url')
 	# url(r'^qaitems/$', QaItemList.as_view(), name='qaitem_list'),
 	# url(r'^qaitems/(?P<pk>\d+)$', QaItemDetail.as_view(), name='qaitem_details')
 )

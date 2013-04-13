@@ -204,6 +204,7 @@ INSTALLED_APPS = (
     # admin
     'django.contrib.admin',
     # 'django.contrib.admindocs',
+    'south',
 )
 
 #REST_FRAMEWORK = {
