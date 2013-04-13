@@ -88,7 +88,7 @@ def login(request):
 	data = request.POST
 	user = User.objects.get(username=data.get("username"))
 	if data.get("password") == user.password:
-		return HttpResponse("{success: true, id: " + user.id + " }")
+		return HttpResponse("{success: true, id: " + str(user.id) + " }")
 	else:
 		return HttpResponse("{success: false}")
 	
