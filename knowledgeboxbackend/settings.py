@@ -200,16 +200,16 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     # external
     'social_auth',
-    'rest_framework',
+    # 'rest_framework',
     # admin
     'django.contrib.admin',
     # 'django.contrib.admindocs',
 )
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGINATE_BY': 10
-}
+#REST_FRAMEWORK = {
+#    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+#    'PAGINATE_BY': 10
+#}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
