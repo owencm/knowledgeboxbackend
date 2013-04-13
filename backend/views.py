@@ -60,6 +60,13 @@ def qaitem_index_filter_by_url(request, url):
 	output_json = simplejson.dumps(qaitems_serialised)
 	return HttpResponse(output_json, mimetype='application/json')
 
+def qaitem_index_filter_by_url_including_learning(request, user_id, url):
+	qaitems = QaItem.objects.filter(url=url)
+	user = User.objects.get(id=user_id)
+	qaitems_serialised = map(lambda qaitem: {"question": qaitem.question, "answer": qaitem.answer, "id": qaitem.id, "url": qaitem.url, "learning": user in qaitem.learners.all()}, qaitems)
+	output_json = simplejson.dumps(qaitems_serialised)
+	return HttpResponse(output_json, mimetype='application/json')
+
 @json_response
 def qaitem_index_filter_by_learning(request, user_id):
 	user = User.objects.get(id=user_id)
