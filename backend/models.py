@@ -22,8 +22,8 @@ class QaItem(models.Model):
 		return self.question
 
 class QResponse(models.Model):
-	qid = models.ForeignKey(QaItem, related_name='question')
-	userid = models.ForeignKey(User, related_name='userid')
+	qid = models.ForeignKey(QaItem, related_name='qaitem')
+	userid = models.ForeignKey(User, related_name='user')
 	correct = models.BooleanField()
 	answered_at = models.DateTimeField('date answered')
 

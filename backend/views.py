@@ -116,7 +116,7 @@ def qresponse(request):
 	n = datetime.datetime.utcnow().replace(tzinfo=utc)
 	qresp = QResponse(qid=data.get("qid"), userid=data.get("userid"), correct=data.get("correct"), time=n)
 	qresp.save()
-	qresp_serialised = {"id": qresp.id, "qid": qresp.qid, "userid":qresp.userid, "correct", qresp.correct, "time":qresp.time}
+	qresp_serialised = {"id": qresp.id, "qid": qresp.qid, "userid":qresp.userid, "correct": qresp.correct, "time":qresp.time}
 	output_json = simplejson.dumps(qresp_serialised)
 	return HttpResponse(output_json, mimetype='application/json')
 
