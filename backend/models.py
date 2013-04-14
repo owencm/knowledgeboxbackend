@@ -21,6 +21,12 @@ class QaItem(models.Model):
 	def __unicode__(self):
 		return self.question
 
+class QResponse(models.Model):
+	qid = models.ForeignKey(QaItem, related_name='question')
+	userid = models.ForeignKey(User, related_name='userid')
+	correct = models.BooleanField()
+	answered_at = models.DateTimeField('date answered')
+
 # class Learning(models.Model):
 # 	qaitem = models.ForeignKey(QaItem)
 # 	user = models.ForeignKey(User)
