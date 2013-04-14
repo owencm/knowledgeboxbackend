@@ -45,6 +45,10 @@ def qaitem_index(request):
 		now = datetime.datetime.utcnow().replace(tzinfo=utc)
 		qaitem = QaItem(question=data.get("question"), answer=data.get("answer"), url=data.get("url"), creator_id=1, created_at=now)
 		qaitem.save()
+
+		user = User.objects.get(id=data.get("user_id"))
+		user.qaitem_set.add(qaitem)
+
 		qaitem_serialised = serialiseItem(qaitem)
 		output_json = simplejson.dumps(qaitem_serialised)
 		return HttpResponse(output_json, mimetype='application/json') 
