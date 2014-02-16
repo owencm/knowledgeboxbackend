@@ -108,19 +108,23 @@ def login(request):
 @csrf_exempt
 def register(request):
 	data = request.POST
-	user = User(username=data.get("username"), password=data.get("password"))
-	user.save()
-	user_serialised = {"username": user.username, "password": user.password, "id": user.id}
-	output_json = simplejson.dumps(user_serialised)
+	existing_user = User.objects.filter(username=data.get("username"))
+	if existing_user.count() == 0:
+		user = User(username=data.get("username"), password=data.get("password"))
+		user.save()
+		user_serialised = {"username": user.username, "password": user.password, "id": user.id}
+		output_json = simplejson.dumps(user_serialised)
+	else:
+		output_json = simplejson.dumps({"success": False})
 	return HttpResponse(output_json, mimetype='application/json')
 
 @csrf_exempt
 def qresponse(request):
 	data = request.POST
 	n = datetime.datetime.utcnow().replace(tzinfo=utc)
-	qresp = QResponse(qid=data.get("qid"), userid=data.get("userid"), correct=data.get("correct"), time=n)
+	qresp = QResponse(qid=data.get("qid"), userid=data.get("user_id"), correct=data.get("correct"), time=n)
 	qresp.save()
-	qresp_serialised = {"id": qresp.id, "qid": qresp.qid, "userid":qresp.userid, "correct": qresp.correct, "time":qresp.time}
+	qresp_serialised = {"id": qresp.id, "qid": qresp.qid, "user_id":qresp.userid, "correct": qresp.correct, "time":qresp.time}
 	output_json = simplejson.dumps(qresp_serialised)
 	return HttpResponse(output_json, mimetype='application/json')
 
