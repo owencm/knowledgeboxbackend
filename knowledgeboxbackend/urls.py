@@ -14,13 +14,6 @@ urlpatterns = patterns('',
 
     url(r'', include('backend.urls')),
 
-    # Uncomment the next line to enable the admin:
-    # social-auth
-	url(r'', include('social_auth.urls')),
-
-	# rest-framework
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    
     # site admin
     url(r'^admin/', include(admin.site.urls)),
 )

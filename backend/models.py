@@ -26,6 +26,9 @@ class QResponse(models.Model):
 	userid = models.ForeignKey(User, related_name='user')
 	correct = models.BooleanField()
 	answered_at = models.DateTimeField('date answered')
+	def __unicode__(self):
+		return self.qid
+
 
 # class Learning(models.Model):
 # 	qaitem = models.ForeignKey(QaItem)

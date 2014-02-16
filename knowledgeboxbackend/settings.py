@@ -24,77 +24,6 @@ DATABASES = {
     }
 }
 
-### START (social)
-# docs: http://django-social-auth.readthedocs.org/en/v0.7.22/
-AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    # 'social_auth.backends.google.GoogleOAuthBackend',
-    # 'social_auth.backends.google.GoogleOAuth2Backend',
-    # 'social_auth.backends.google.GoogleBackend',
-    # 'social_auth.backends.yahoo.YahooBackend',
-    # 'social_auth.backends.browserid.BrowserIDBackend',
-    # 'social_auth.backends.contrib.linkedin.LinkedinBackend',
-    # 'social_auth.backends.contrib.disqus.DisqusBackend',
-    # 'social_auth.backends.contrib.livejournal.LiveJournalBackend',
-    # 'social_auth.backends.contrib.orkut.OrkutBackend',
-    # 'social_auth.backends.contrib.foursquare.FoursquareBackend',
-    # 'social_auth.backends.contrib.github.GithubBackend',
-    # 'social_auth.backends.contrib.vkontakte.VKontakteBackend',
-    # 'social_auth.backends.contrib.live.LiveBackend',
-    # 'social_auth.backends.contrib.skyrock.SkyrockBackend',
-    # 'social_auth.backends.contrib.yahoo.YahooOAuthBackend',
-    # 'social_auth.backends.contrib.readability.ReadabilityBackend',
-    # 'social_auth.backends.OpenIDBackend',
-    
-    # default
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-FACEBOOK_APP_ID              = '563397963682181'
-FACEBOOK_API_SECRET          = '40274371776eea20175f6a2548d56054'
-TWITTER_CONSUMER_KEY         = 'pnD1dFhpz65NZbT0HtZfcw'
-TWITTER_CONSUMER_SECRET      = 'f0TK4o1DoyHgrIfvkwWn9CTNIhyexn8fhugbknBQ'
-
-
-LOGIN_URL          = '/login-form/'
-LOGIN_REDIRECT_URL = '/logged-in/'
-LOGIN_ERROR_URL    = '/login-error/'
-
-# If a custom redirect URL is needed that must be different to LOGIN_URL, define the setting:
-# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/another-login-url/'
-
-# A different URL could be defined for newly registered users:
-# SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
-
-# or for newly associated accounts:
-# SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
-
-# or for account disconnections:
-# SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
-
-# Users will be redirected to LOGIN_ERROR_URL in case of error or user cancellation
-# on some backends. This URL can be override by this setting:
-# SOCIAL_AUTH_BACKEND_ERROR_URL = '/new-error-url/'
-
-# Used to build a default username if provider didn't return any useful value:
-SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
-
-# You can send extra parameters on auth process by defining settings per backend,
-# example to request Facebook to show Mobile authorization page, define:
-# FACEBOOK_AUTH_EXTRA_ARGUMENTS = {'display': 'touch'}
-
-# For other providers, just define settings in the form:
-# <uppercase backend name>_AUTH_EXTRA_ARGUMENTS = {...}
-
-# By default the application doesn't make redirects to different domains, to disable this behavior:
-# SOCIAL_AUTH_SANITIZE_REDIRECTS = False
-
-# Add Facebook permissions (email is turned off by default)
-# FACEBOOK_EXTENDED_PERMISSIONS = ['email']
-
-### END (social)
-
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -197,20 +126,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # our apps
     'backend',
-    # Uncomment the next line to enable the admin:
-    # external
-    'social_auth',
-    # 'rest_framework',
-    # admin
     'django.contrib.admin',
     # 'django.contrib.admindocs',
     'south',
 )
-
-#REST_FRAMEWORK = {
-#    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-#    'PAGINATE_BY': 10
-#}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
